@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.css' integrity='sha512-bR79Bg78Wmn33N5nvkEyg66hNg+xF/Q8NA8YABbj+4sBngYhv9P8eum19hdjYcY7vXk/vRkhM3v/ZndtgEXRWw==' crossorigin='anonymous'/>
+    <style>
+       body{
+        height: 100vh;
+       }
+
+       section{
+        height: 100vh;
+        background-color: lightcoral;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       }
+
+       section:nth-child(odd){
+        background-color: lightgoldenrodyellow;
+       }
+
+       section:nth-child(even){
+        background-color: lightsteelblue;
+       }
+
+       section img{
+        width: 100%;
+        height: 100px;
+        opacity:0
+       }
+
+       #date{
+        height: 5rem;
+        display: none;
+        font-size: 5rem;
+       }
+
+    </style>
+</head>
+<body>
+  <section></section>
+  <section id="section01">
+    <div id="date"></div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js' integrity='sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==' crossorigin='anonymous'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js' integrity='sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==' crossorigin='anonymous'></script>
+    <!-- gsap主程式 -->
+    <script src="./umd/gsap.js"></script>
+    <!-- gsap plugins 必須在gsap主程式之後 -->
+    <script src="./umd/ScrollTrigger.js"></script>
+
+    <script>
+       gsap.registerPlugin(ScrollTrigger)
+       
+       const date = {
+        year:new Date().getFullYear(),
+        month:new Date().getMonth()+1,
+        day:new Date().getDate(),
+       }
+
+       gsap.from(date,{
+        scrollTrigger:{
+          trigger:'#section01',
+          start:'top center',
+          end:'bottom center',
+          toggleActions:'play reset none reset',
+          onEnter(){
+            $('#date').css({display:'block'})
+          },
+          onLeave(){
+            $('#date').css({display:'none'})
+          },
+          markers:true
+        },
+        onUpdate(){
+          $('#date').text(`${date.year.toFixed(0)}/${date.month.toFixed(0)}/${date.day.toFixed(0)}`)
+        },
+        year:0,
+        month:0,
+        day:0,
+        duration:1,
+        ease:'slow'
+       })
+    </script>
+    
+</body>
+</html>

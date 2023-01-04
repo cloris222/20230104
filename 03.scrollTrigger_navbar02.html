@@ -111,12 +111,25 @@
        gsap.registerPlugin(ScrollTrigger)
        
        const navbar_tl = gsap.timeline({
-        trigger:'#section01',
-        start:'-10px top',
-        end:'56px top',
-        toggleActions :'play reverse none none',
-        markers:true
+        scrollTrigger:{
+          trigger:'#section01',
+          // 設定-10px 一開始就要觸發scrollTrigger
+          start:'-10px top',
+          end:'56px top',
+          toggleActions :'play reverse play none',
+          markers:true
+        }
        })
+
+       navbar_tl
+        .from('.navbar',{
+          y:-60,
+          duration:0.3
+        })
+        .from('.navbar-brand,.nav-item,form',{
+          y:-60,
+          stagger:0.05
+        })
     </script>
     
 </body>
