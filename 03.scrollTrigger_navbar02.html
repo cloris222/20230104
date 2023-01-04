@@ -109,22 +109,13 @@
 
     <script>
        gsap.registerPlugin(ScrollTrigger)
-       gsap.from('.navbar',{
-        yPercent:-100,
-        duration:0.2,
-        scrollTrigger:{
-        // 若沒有設定trigger則預設trigger為整份文件
-        // ${$('.navbar').height()}為將高度降低一點以在進入網頁時即可觸發動畫
-        start:`top ${$('.navbar').height()}`,
-        end:()=>'+='+document.documentElement.scrollHeight,
-        onEnter(self){
-           self.animation.play()
-        },
-        onUpdate(self){
-            self.direction===-1?self.animation.play():self.animation.reverse()
-        },
-        markers:true,
-        }
+       
+       const navbar_tl = gsap.timeline({
+        trigger:'#section01',
+        start:'-10px top',
+        end:'56px top',
+        toggleActions :'play reverse none none',
+        markers:true
        })
     </script>
     
