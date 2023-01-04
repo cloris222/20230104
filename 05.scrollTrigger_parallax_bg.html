@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.css' integrity='sha512-bR79Bg78Wmn33N5nvkEyg66hNg+xF/Q8NA8YABbj+4sBngYhv9P8eum19hdjYcY7vXk/vRkhM3v/ZndtgEXRWw==' crossorigin='anonymous'/>
+    <style>
+
+       section{
+        height: 50vh;
+        font-size: 3rem;
+        color: #fff;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       }
+
+
+    </style>
+</head>
+<body>
+  <section id="section01">section01</section>
+  <section id="section02">section02</section>
+  <section id="section03">section03</section>
+  <section id="section04">section04</section>
+  <section id="section05">section05</section>
+  <section id="section06">section06</section>
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js' integrity='sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==' crossorigin='anonymous'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js' integrity='sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==' crossorigin='anonymous'></script>
+    <!-- gsap主程式 -->
+    <script src="./umd/gsap.js"></script>
+    <!-- gsap plugins 必須在gsap主程式之後 -->
+    <script src="./umd/ScrollTrigger.js"></script>
+
+    <script>
+       gsap.registerPlugin(ScrollTrigger)
+
+      //  轉成陣列
+      const section = gsap.utils.toArray('section')
+       
+       $(section).each(function(i,e){
+        $(e).css({
+          backgroundImage:`url(https://picsum.photos/300/200/?random=${i})`
+        })
+
+        gsap.to(e,{
+        scrollTrigger:{
+          trigger:e,
+          start:"top 50%",
+          end:'bottom 0%',
+          scrub:true,
+          markers:true,
+        },
+        backgroundPosition:'50% -50%',
+        ease:'none'
+       })
+       })
+
+       
+    </script>
+    
+</body>
+</html>
